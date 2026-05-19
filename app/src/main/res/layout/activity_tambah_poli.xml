@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tambah Poli Baru"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#2D3436"
+            android:layout_marginTop="20dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp"
+            android:layout_marginTop="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Poli"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etNamaPoli"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Contoh: Poli Gigi, Poli Anak"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"
+                    android:inputType="text"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deskripsi"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etDeskripsiPoli"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="100dp"
+                    android:hint="Deskripsi singkat mengenai layanan poli..."
+                    android:gravity="top"
+                    android:background="@drawable/bg_input_field"
+                    android:padding="15dp"
+                    android:inputType="textMultiLine"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnSimpanPoli"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="SIMPAN POLI"
+            android:textStyle="bold"
+            android:backgroundTint="#6C5CE7"
+            android:textColor="@color/white"
+            android:layout_marginTop="32dp"
+            app:cornerRadius="12dp"/>
+
+    </LinearLayout>
+</ScrollView>

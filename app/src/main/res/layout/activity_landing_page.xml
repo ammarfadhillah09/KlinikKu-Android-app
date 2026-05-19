@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="28dp">
+
+    <!-- Centered Hero Area -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Logo Container Card -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="35dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <ImageView
+                android:id="@+id/ivLogoKlinik"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_klinikku_logo"
+                android:contentDescription="KlinikKu Logo" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Brand Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KlinikKu"
+            android:textSize="38sp"
+            android:textStyle="bold"
+            android:textColor="#2196F3"
+            android:letterSpacing="0.05"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Slogan -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Layanan Kesehatan Digital Terpercaya"
+            android:textSize="15sp"
+            android:textColor="#7F8C8D"
+            android:gravity="center"
+            android:textStyle="normal" />
+
+    </LinearLayout>
+
+</LinearLayout>

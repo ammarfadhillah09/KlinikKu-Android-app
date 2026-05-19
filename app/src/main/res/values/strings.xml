@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">klinikku</string>
+    <string-array name="golongan_darah_array">
+        <item>Pilih Golongan Darah</item>
+        <item>A</item>
+        <item>B</item>
+        <item>AB</item>
+        <item>O</item>
+    </string-array>
+    <string-array name="poli_array">
+        <item>Pilih Poli Tujuan</item>
+        <item>Umum</item>
+        <item>Gigi</item>
+        <item>Anak</item>
+    </string-array>
+</resources>

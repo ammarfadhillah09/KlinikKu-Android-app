@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Klinikku">
+
+        <activity
+            android:name=".ui.LoginActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.LandingPageActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.RegisterPasienActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.DetailPasienActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.ProfilMedisActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.BookingAntreanActivity"
+            android:exported="false"
+            android:label="Booking Antrean" />
+
+        <activity
+            android:name=".ui.TambahDokterActivity"
+            android:exported="false"
+            android:label="Tambah Dokter" />
+
+        <activity
+            android:name=".ui.TambahPoliActivity"
+            android:exported="false"
+            android:label="Tambah Poli" />
+
+        <activity
+            android:name=".ui.TambahJadwalActivity"
+            android:exported="false"
+            android:label="Tambah Jadwal" />
+
+        <activity
+            android:name=".ui.PendaftaranKlinikActivity"
+            android:exported="false"
+            android:label="Pilih Dokter" />
+
+        <activity
+            android:name=".ui.RiwayatAntreanActivity"
+            android:exported="false"
+            android:label="Riwayat Antrean" />
+
+    </application>
+
+</manifest>

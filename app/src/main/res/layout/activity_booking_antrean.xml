@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Booking Antrean"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#2D3436"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Silakan pilih poli dan tanggal kunjungan Anda."
+            android:textSize="14sp"
+            android:textColor="#636E72"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data Pasien"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="12dp"/>
+
+                <TextView
+                    android:id="@+id/tvBookingNama"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama: -"
+                    android:textSize="16sp"
+                    android:textColor="#2D3436"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvBookingNik"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NIK: -"
+                    android:textSize="14sp"
+                    android:textColor="#636E72"
+                    android:layout_marginBottom="16dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#DFE6E9"
+                    android:layout_marginBottom="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilih Poli Tujuan"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerPoli"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal Kunjungan"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etTanggalKunjungan"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Pilih Tanggal"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"
+                    android:inputType="none"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnAmbilAntrean"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="AMBIL NOMOR ANTREAN"
+            android:textStyle="bold"
+            android:backgroundTint="#00B894"
+            android:textColor="@color/white"
+            android:layout_marginTop="32dp"
+            app:cornerRadius="12dp"/>
+
+    </LinearLayout>
+</ScrollView>

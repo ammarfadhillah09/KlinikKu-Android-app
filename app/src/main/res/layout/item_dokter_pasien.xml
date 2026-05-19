@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <!-- Header: Avatar placeholder + Name -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Doctor avatar circle -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:cardCornerRadius="24dp"
+                app:cardBackgroundColor="#EBF5FB"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tvInisialDokterPasien"
+                    android:gravity="center"
+                    android:text="Dr"
+                    android:textColor="#0984E3"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </androidx.cardview.widget.CardView>
+
+            <!-- Name + Specialist -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
+
+                <TextView
+                    android:id="@+id/tvNamaDokterPasien"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dr. Nama Dokter"
+                    android:textColor="#2D3436"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvSpesialisDokterPasien"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Spesialis Umum"
+                    android:textColor="#636E72"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EEF2F7"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Schedule Info Chip Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Calendar icon badge -->
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@android:drawable/ic_menu_my_calendar"
+                android:layout_marginEnd="6dp"
+                android:contentDescription="Jadwal" />
+
+            <TextView
+                android:id="@+id/tvJadwalDokterPasien"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Jadwal: Senin, Selasa (08:00 - 17:00)"
+                android:textColor="#0984E3"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+        </LinearLayout>
+
+        <!-- Status badge row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="6dp">
+
+            <TextView
+                android:id="@+id/tvStatusPraktek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="● Praktek Hari Ini"
+                android:textColor="#00B894"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Daftar Button -->
+        <Button
+            android:id="@+id/btnDaftarDokter"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:text="Daftar Sekarang"
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:backgroundTint="#0984E3"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="14dp"
+            app:cornerRadius="10dp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

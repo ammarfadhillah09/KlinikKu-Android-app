@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tambah Jadwal Dokter"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#2D3436"
+            android:layout_marginTop="20dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp"
+            android:layout_marginTop="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NIK Dokter"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etNikDokter"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Masukkan NIK Dokter terdaftar"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"
+                    android:inputType="number"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Dokter"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etNamaDokter"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Nama Lengkap Dokter"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"
+                    android:inputType="text"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hari Praktek"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etHariPraktek"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Contoh: Senin, Selasa"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"
+                    android:inputType="text"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="16dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jam Mulai"
+                            android:textStyle="bold"
+                            android:textColor="#0984E3"
+                            android:textSize="12sp"
+                            android:layout_marginBottom="8dp"/>
+
+                        <EditText
+                            android:id="@+id/etJamMulai"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="08:00"
+                            android:background="@drawable/bg_input_field"
+                            android:paddingHorizontal="15dp"
+                            android:inputType="text"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jam Selesai"
+                            android:textStyle="bold"
+                            android:textColor="#0984E3"
+                            android:textSize="12sp"
+                            android:layout_marginBottom="8dp"/>
+
+                        <EditText
+                            android:id="@+id/etJamSelesai"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="12:00"
+                            android:background="@drawable/bg_input_field"
+                            android:paddingHorizontal="15dp"
+                            android:inputType="text"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kuota Antrean"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etKuota"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Contoh: 30"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"
+                    android:inputType="number"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnSimpanJadwal"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="SIMPAN JADWAL"
+            android:textStyle="bold"
+            android:backgroundTint="#6C5CE7"
+            android:textColor="@color/white"
+            android:layout_marginTop="32dp"
+            app:cornerRadius="12dp"/>
+
+    </LinearLayout>
+</ScrollView>

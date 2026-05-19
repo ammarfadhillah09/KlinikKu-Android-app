@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvFormTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tambah Akun Dokter"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#2D3436"
+            android:layout_marginTop="20dp"/>
+
+        <!-- ===== CARD: Data Akun ===== -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp"
+            android:layout_marginTop="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data Akun"
+                    android:textStyle="bold"
+                    android:textColor="#2D3436"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- NIK -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NIK Dokter"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etNikDokter"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="16 Digit NIK"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"
+                    android:inputType="number"
+                    android:maxLength="16"/>
+
+                <!-- Nama -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Dokter"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etNamaDokter"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Nama Lengkap &amp; Gelar"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"
+                    android:inputType="textPersonName"/>
+
+                <!-- Username -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Username Akun"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etUsernameDokter"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Username untuk Login"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"
+                    android:inputType="text"/>
+
+                <!-- Password -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Password Akun"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etPasswordDokter"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Password untuk Login"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"
+                    android:inputType="textPassword"/>
+
+                <!-- Toggle Credential Edit Button (only visible in Edit Mode) -->
+                <Button
+                    android:id="@+id/btnUbahKredensial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="12dp"
+                    android:text="Ubah Kredensial"
+                    android:textSize="13sp"
+                    android:textColor="#0984E3"
+                    android:backgroundTint="#E8F4FD"
+                    android:paddingHorizontal="16dp"
+                    android:visibility="gone"
+                    app:cornerRadius="8dp"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ===== CARD: Data Praktik ===== -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data Praktik"
+                    android:textStyle="bold"
+                    android:textColor="#2D3436"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Poli Spinner -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Poli / Departemen"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="8dp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerPoliDokter"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"/>
+
+                <!-- Spesialis -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spesialisasi"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etSpesialisDokter"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Contoh: Spesialis Anak"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"
+                    android:inputType="textCapWords"/>
+
+                <!-- Hari Praktek -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hari Praktek"
+                    android:textStyle="bold"
+                    android:textColor="#0984E3"
+                    android:textSize="12sp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etHariPraktek"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:hint="Pilih hari praktek"
+                    android:background="@drawable/bg_input_field"
+                    android:paddingHorizontal="15dp"
+                    android:inputType="text"
+                    android:focusable="false"
+                    android:clickable="true"/>
+
+                <!-- Jam Mulai & Jam Selesai (side-by-side) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="16dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jam Mulai"
+                            android:textStyle="bold"
+                            android:textColor="#0984E3"
+                            android:textSize="12sp"
+                            android:layout_marginBottom="8dp"/>
+
+                        <EditText
+                            android:id="@+id/etJamMulai"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="08:00"
+                            android:background="@drawable/bg_input_field"
+                            android:paddingHorizontal="15dp"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:clickable="true"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jam Selesai"
+                            android:textStyle="bold"
+                            android:textColor="#0984E3"
+                            android:textSize="12sp"
+                            android:layout_marginBottom="8dp"/>
+
+                        <EditText
+                            android:id="@+id/etJamSelesai"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:hint="12:00"
+                            android:background="@drawable/bg_input_field"
+                            android:paddingHorizontal="15dp"
+                            android:inputType="text"
+                            android:focusable="false"
+                            android:clickable="true"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnSimpanDokter"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="BUAT AKUN DOKTER"
+            android:textStyle="bold"
+            android:backgroundTint="#00B894"
+            android:textColor="@color/white"
+            android:layout_marginTop="32dp"
+            app:cornerRadius="12dp"/>
+
+    </LinearLayout>
+</ScrollView>
