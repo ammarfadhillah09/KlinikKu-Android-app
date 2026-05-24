@@ -19,6 +19,11 @@
             android:exported="false" />
 
         <activity
+            android:name=".ui.DashboardDokterActivity"
+            android:exported="false"
+            android:label="Dashboard Dokter" />
+
+        <activity
             android:name=".ui.LandingPageActivity"
             android:exported="true">
             <intent-filter>

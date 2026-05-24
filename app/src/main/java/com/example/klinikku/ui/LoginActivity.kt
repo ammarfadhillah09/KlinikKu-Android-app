@@ -74,19 +74,30 @@ class LoginActivity : AppCompatActivity() {
 
                         Toast.makeText(this@LoginActivity, "Selamat Datang, $nama!", Toast.LENGTH_SHORT).show()
 
-                        // 4. Navigasi Berdasarkan Role
-                        if (role == "admin") {
-                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                            finish() // TUTUP LOGIN KARENA SUKSES PINDAH
-                        } else {
-                            if (!nik.isNullOrEmpty()) {
-                                val intent = Intent(this@LoginActivity, DetailPasienActivity::class.java)
-                                intent.putExtra("NIK_PASIEN", nik)
+                        // 4. Navigasi Berdasarkan Role (admin / dokter / pasien)
+                        when (role) {
+                            "admin" -> {
+                                // Admin masuk ke Dashboard Admin (MainActivity)
+                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                                finish()
+                            }
+                            "dokter" -> {
+                                // Dokter masuk ke Dashboard Dokter
+                                val intent = Intent(this@LoginActivity, DashboardDokterActivity::class.java)
                                 startActivity(intent)
-                                finish() // TUTUP LOGIN KARENA SUKSES PINDAH
-                            } else {
-                                // JIKA NIK KOSONG, JANGAN ADA FINISH()! BIARKAN USER TETAP DI HALAMAN LOGIN
-                                Toast.makeText(this@LoginActivity, "Data NIK kosong di server!", Toast.LENGTH_LONG).show()
+                                finish()
+                            }
+                            else -> {
+                                // Default: Pasien masuk ke Detail Pasien
+                                if (!nik.isNullOrEmpty()) {
+                                    val intent = Intent(this@LoginActivity, DetailPasienActivity::class.java)
+                                    intent.putExtra("NIK_PASIEN", nik)
+                                    startActivity(intent)
+                                    finish()
+                                } else {
+                                    // JIKA NIK KOSONG, JANGAN ADA FINISH()! BIARKAN USER TETAP DI HALAMAN LOGIN
+                                    Toast.makeText(this@LoginActivity, "Data NIK kosong di server!", Toast.LENGTH_LONG).show()
+                                }
                             }
                         }
                     } else {

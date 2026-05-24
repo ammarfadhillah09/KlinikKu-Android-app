@@ -35,6 +35,11 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    // Aktifkan View Binding agar class binding otomatis di-generate dari layout XML
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
