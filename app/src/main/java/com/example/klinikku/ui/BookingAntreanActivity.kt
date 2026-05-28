@@ -65,8 +65,9 @@ class BookingAntreanActivity : AppCompatActivity() {
         // 3. Load poli list dynamically from API
         loadPoliSpinner()
 
-        // 4. Navigate to doctor listing screen
-        btnPilihDokter.setOnClickListener { navigateToPendaftaran() }
+        // 4. Check Quota in Firebase before navigating to doctor listing screen
+        // Pastikan hanya ini satu-satunya OnClickListener untuk btnPilihDokter
+        btnPilihDokter.setOnClickListener { checkQuotaSebelumDaftar() }
     }
 
     private fun loadPoliSpinner() {
@@ -111,19 +112,87 @@ class BookingAntreanActivity : AppCompatActivity() {
         }.show()
     }
 
-    private fun navigateToPendaftaran() {
+    private fun checkQuotaSebelumDaftar() {
         val poli = spinnerPoli.selectedItem?.toString() ?: ""
-        val tanggal = etTanggal.text.toString().trim()
+        val tanggalInputStr = etTanggal.text.toString().trim()
 
         if (poli.isBlank()) {
             Toast.makeText(this, "Silakan pilih poli tujuan", Toast.LENGTH_SHORT).show()
             return
         }
-        if (tanggal.isEmpty()) {
+        if (tanggalInputStr.isEmpty()) {
             Toast.makeText(this, "Silakan pilih tanggal kunjungan", Toast.LENGTH_SHORT).show()
             return
         }
 
+        if (userNik == null) {
+            Toast.makeText(this, "Sesi tidak valid, NIK kosong", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val database = com.google.firebase.database.FirebaseDatabase.getInstance()
+        val antreanRef = database.getReference("antrean")
+
+        btnPilihDokter.isEnabled = false
+        btnPilihDokter.text = "Mengecek Kuota..."
+
+        antreanRef.addListenerForSingleValueEvent(object : com.google.firebase.database.ValueEventListener {
+            override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
+                var count = 0
+                val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+
+                try {
+                    val inputDate = sdf.parse(tanggalInputStr) ?: java.util.Date()
+                    val inputCalendar = java.util.Calendar.getInstance().apply { time = inputDate }
+                    val inputWeek = inputCalendar.get(java.util.Calendar.WEEK_OF_YEAR)
+                    val inputYear = inputCalendar.get(java.util.Calendar.YEAR)
+
+                    for (data in snapshot.children) {
+                        val pendaftaranId = data.child("pasien_id").getValue(String::class.java)
+                        val pendaftaranTgl = data.child("tanggal_kunjungan").getValue(String::class.java)
+                        val pendaftaranStatus = data.child("status").getValue(String::class.java) ?: "Menunggu" // Beri default value jika null!
+
+                        // Pastikan pengecekan id dan tanggal aman dari null
+                        if (pendaftaranId == userNik && pendaftaranTgl != null) {
+                            // Gunakan fungsi safe call atau pastikan pendaftaranStatus tidak null sebelum equals
+                            if (!pendaftaranStatus.equals("dibatalkan", ignoreCase = true)) {
+                                val dbDate = sdf.parse(pendaftaranTgl)
+                                if (dbDate != null) {
+                                    val dbCalendar = java.util.Calendar.getInstance().apply { time = dbDate }
+                                    val dbWeek = dbCalendar.get(java.util.Calendar.WEEK_OF_YEAR)
+                                    val dbYear = dbCalendar.get(java.util.Calendar.YEAR)
+
+                                    if (dbWeek == inputWeek && dbYear == inputYear) {
+                                        count++
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    // Abaikan error parsing tanggal
+                }
+
+                btnPilihDokter.isEnabled = true
+                btnPilihDokter.text = "PILIH DOKTER"
+
+                // Batasan kuota murni dikontrol oleh kondisi ini (4 kali)
+                if (count >= 4) {
+                    Toast.makeText(this@BookingAntreanActivity, "Maaf, Anda telah mencapai batas maksimal pendaftaran (4 kali dalam seminggu)!", Toast.LENGTH_LONG).show()
+                } else {
+                    navigateToPendaftaranLanjut(poli, tanggalInputStr)
+                }
+            }
+
+            override fun onCancelled(error: com.google.firebase.database.DatabaseError) {
+                btnPilihDokter.isEnabled = true
+                btnPilihDokter.text = "PILIH DOKTER"
+                Toast.makeText(this@BookingAntreanActivity, "Gagal mengecek kuota: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun navigateToPendaftaranLanjut(poli: String, tanggal: String) {
         val intent = Intent(this, PendaftaranKlinikActivity::class.java).apply {
             putExtra(PendaftaranKlinikActivity.EXTRA_POLI_NAMA, poli)
             putExtra(PendaftaranKlinikActivity.EXTRA_TANGGAL, tanggal)

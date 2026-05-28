@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "302100002214",
+    "firebase_url": "https://klinikku-dcc7b-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "klinikku-dcc7b",
+    "storage_bucket": "klinikku-dcc7b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:302100002214:android:d8c0e7e4a31afe2d004b67",
+        "android_client_info": {
+          "package_name": "com.example.klinikku"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9iKbNGEKQGmuhK-h0nwcmKa6mfMn6-tU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

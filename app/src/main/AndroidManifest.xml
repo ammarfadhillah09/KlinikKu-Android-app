@@ -24,6 +24,11 @@
             android:label="Dashboard Dokter" />
 
         <activity
+            android:name=".ui.DaftarAntreanDokterActivity"
+            android:exported="false"
+            android:label="Antrean Pasien" />
+
+        <activity
             android:name=".ui.LandingPageActivity"
             android:exported="true">
             <intent-filter>
@@ -42,6 +47,10 @@
 
         <activity
             android:name=".ui.DetailPasienActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.DashboardPasienActivity"
             android:exported="false" />
 
         <activity

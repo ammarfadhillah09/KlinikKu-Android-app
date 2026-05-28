@@ -13,4 +13,55 @@
         <item>Gigi</item>
         <item>Anak</item>
     </string-array>
+    <!-- Dashboard Dokter - Header -->
+    <string name="dashboard_greeting">Selamat datang,</string>
+    <string name="dashboard_subtitle">Semoga harimu penuh kebaikan 😊</string>
+
+    <!-- Dashboard Dokter - Profile Card -->
+    <string name="label_nama_lengkap">Nama Lengkap</string>
+    <string name="label_nik">NIK</string>
+    <string name="label_profil_dokter">PROFIL DOKTER</string>
+
+    <!-- Dashboard Dokter - Metrics -->
+    <string name="section_ringkasan">Ringkasan Hari Ini</string>
+    <string name="label_pasien">Pasien</string>
+    <string name="label_jadwal">Jadwal</string>
+    <string name="label_tindakan">Tindakan</string>
+    <string name="label_rating">Rating</string>
+
+    <!-- Dashboard Dokter - Menu -->
+    <string name="section_menu_dokter">Menu Dokter</string>
+    <string name="menu_jadwal_praktek">Lihat Jadwal Praktek</string>
+    <string name="menu_jadwal_desc">Kelola jadwal praktek Anda</string>
+    <string name="menu_daftar_pasien">Daftar Pasien</string>
+    <string name="menu_daftar_pasien_desc">Lihat antrean pasien hari ini</string>
+    <string name="menu_rekam_medis">Rekam Medis</string>
+    <string name="menu_rekam_medis_desc">Akses rekam medis pasien</string>
+    <string name="menu_laporan">Laporan</string>
+    <string name="menu_laporan_desc">Lihat laporan &amp; statistik</string>
+
+    <!-- Dashboard Dokter - Jadwal Berikutnya -->
+    <string name="section_jadwal_berikutnya">Jadwal Berikutnya</string>
+    <string name="badge_terjadwal">Terjadwal</string>
+    <string name="badge_menunggu">Menunggu</string>
+    <string name="jadwal_kosong">Belum ada jadwal berikutnya</string>
+    <string name="memuat_data">Memuat data…</string>
+
+    <!-- Dashboard Dokter - Safety Banner -->
+    <string name="safety_banner_text">Ingat Protokol Kesehatan — Jaga kebersihan dan berikan pelayanan terbaik</string>
+
+    <!-- Dashboard Dokter - Bottom Navigation -->
+    <string name="nav_beranda">Beranda</string>
+    <string name="nav_jadwal">Jadwal</string>
+
+    <string name="nav_profil">Profil</string>
+
+    <!-- Dashboard Dokter - Misc -->
+    <string name="notifikasi">Notifikasi</string>
+    <string name="avatar_dokter">Foto profil dokter</string>
+    <string name="memuat">Memuat…</string>
+    <string name="logout_confirm_title">Konfirmasi Logout</string>
+    <string name="logout_confirm_message">Apakah Anda yakin ingin keluar?</string>
+    <string name="ya">Ya</string>
+    <string name="batal">Batal</string>
 </resources>

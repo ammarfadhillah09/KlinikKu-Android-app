@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/tvJudulDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Beri Rating &amp; Ulasan Dokter"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#2D3436"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pilih Dokter yang Ingin Dinilai:"
+        android:textSize="14sp"
+        android:textColor="#636E72"
+        android:layout_marginBottom="8dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerPilihDokter"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/tvPoliRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Poli: Pilih dokter terlebih dahulu"
+        android:textSize="14sp"
+        android:textColor="#0984E3"
+        android:layout_marginBottom="16dp"
+        android:textStyle="italic"/>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:numStars="5"
+        android:stepSize="1.0"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/etKomentar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="Bagaimana pengalaman Anda berobat dengan dokter ini?"
+        android:gravity="top|start"
+        android:inputType="textMultiLine"
+        android:background="@android:drawable/edit_text"
+        android:padding="12dp"
+        android:textSize="14sp"
+        android:layout_marginBottom="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+
+        <Button
+            android:id="@+id/btnBatal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Batal"
+            style="?android:attr/buttonBarButtonStyle"
+            android:textColor="#D63031"/>
+
+        <Button
+            android:id="@+id/btnKirimUlasan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kirim Ulasan"
+            android:backgroundTint="#0984E3"
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+</LinearLayout>

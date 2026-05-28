@@ -88,10 +88,9 @@ class LoginActivity : AppCompatActivity() {
                                 finish()
                             }
                             else -> {
-                                // Default: Pasien masuk ke Detail Pasien
+                                // Default: Pasien masuk ke Dashboard Pasien
                                 if (!nik.isNullOrEmpty()) {
-                                    val intent = Intent(this@LoginActivity, DetailPasienActivity::class.java)
-                                    intent.putExtra("NIK_PASIEN", nik)
+                                    val intent = Intent(this@LoginActivity, DashboardPasienActivity::class.java)
                                     startActivity(intent)
                                     finish()
                                 } else {

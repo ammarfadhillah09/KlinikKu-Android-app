@@ -1,6 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary Palette -->
+    <color name="emerald_green">#00B894</color>
+    <color name="emerald_green_dark">#00A381</color>
+    <color name="deep_blue">#0984E3</color>
+    <color name="deep_blue_dark">#0870C4</color>
+    <color name="bg_light_gray">#F5F7FA</color>
     <color name="clinic_blue">#0984E3</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#2D3436</color>
+    <color name="text_secondary">#636E72</color>
+    <color name="text_hint">#B2BEC3</color>
+
+    <!-- Metric Card Icon Colors -->
+    <color name="metric_blue">#0984E3</color>
+    <color name="metric_green">#00B894</color>
+    <color name="metric_purple">#6C5CE7</color>
+    <color name="metric_orange">#F39C12</color>
+
+    <!-- Metric Card Background (15% opacity) -->
+    <color name="metric_blue_bg">#260984E3</color>
+    <color name="metric_green_bg">#2600B894</color>
+    <color name="metric_purple_bg">#266C5CE7</color>
+    <color name="metric_orange_bg">#26F39C12</color>
+
+    <!-- Badge & Divider -->
+    <color name="badge_green">#00B894</color>
+    <color name="badge_green_bg">#1A00B894</color>
+    <color name="divider">#E0E0E0</color>
+
+    <!-- Bottom Navigation -->
+    <color name="bottom_nav_active">#00B894</color>
+    <color name="bottom_nav_inactive">#B2BEC3</color>
+
+    <!-- Card & Surface -->
+    <color name="card_surface">#FFFFFF</color>
+    <color name="profile_card_decoration">#1AFFFFFF</color>
+
+    <!-- Safety Banner -->
+    <color name="safety_banner_bg">#FFF8E1</color>
+    <color name="safety_banner_icon">#F39C12</color>
+    <color name="safety_banner_text">#795548</color>
+
+    <!-- Danger -->
+    <color name="danger_red">#D63031</color>
 </resources>

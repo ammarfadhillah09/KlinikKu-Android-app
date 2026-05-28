@@ -179,6 +179,19 @@ class PendaftaranKlinikActivity : AppCompatActivity() {
 
         val isPracticingOnTargetDay = daysList.contains(targetBookingDay.trim().lowercase())
 
+        // Buat view khusus untuk input keluhan di dalam dialog
+        val container = android.widget.LinearLayout(this).apply {
+            orientation = android.widget.LinearLayout.VERTICAL
+            setPadding(50, 40, 50, 10)
+        }
+        
+        val etKeluhan = android.widget.EditText(this).apply {
+            hint = "Keluhan (contoh: sakit kepala, demam)"
+            inputType = android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
+            maxLines = 3
+        }
+        container.addView(etKeluhan)
+
         if (!isPracticingOnTargetDay) {
             // ── Show warning dialog ────────────────────────────────────────────
             AlertDialog.Builder(this)
@@ -186,10 +199,13 @@ class PendaftaranKlinikActivity : AppCompatActivity() {
                 .setMessage(
                     "Dr. ${dokter.nama} tidak praktek pada hari $targetBookingDay (Hari Kunjungan Terpilih).\n\n" +
                     "Jadwal Praktek: ${dokter.hari.ifBlank { "-" }}\n\n" +
-                    "Apakah Anda tetap ingin mendaftar?"
+                    "Apakah Anda tetap ingin mendaftar?\n" +
+                    "Jika ya, silakan isi keluhan Anda di bawah ini:"
                 )
+                .setView(container)
                 .setPositiveButton("Ya, Tetap Daftar") { _, _ ->
-                    prosesBooking(dokter)
+                    val keluhanInput = etKeluhan.text.toString().trim().ifEmpty { "-" }
+                    prosesBooking(dokter, keluhanInput)
                 }
                 .setNegativeButton("Batal", null)
                 .show()
@@ -202,10 +218,13 @@ class PendaftaranKlinikActivity : AppCompatActivity() {
                     "Dokter  : ${dokter.nama}\n" +
                     "Poli    : $poliNama\n" +
                     "Tanggal : $tanggal\n\n" +
-                    "Jadwal  : ${dokter.hari} (${dokter.jam_mulai} - ${dokter.jam_selesai})"
+                    "Jadwal  : ${dokter.hari} (${dokter.jam_mulai} - ${dokter.jam_selesai})\n\n" +
+                    "Silakan isi keluhan Anda di bawah ini:"
                 )
+                .setView(container)
                 .setPositiveButton("Daftar") { _, _ ->
-                    prosesBooking(dokter)
+                    val keluhanInput = etKeluhan.text.toString().trim().ifEmpty { "-" }
+                    prosesBooking(dokter, keluhanInput)
                 }
                 .setNegativeButton("Batal", null)
                 .show()
@@ -213,44 +232,72 @@ class PendaftaranKlinikActivity : AppCompatActivity() {
     }
 
     /**
-     * Sends the booking (pendaftaran) request to the API.
+     * Sends the booking (pendaftaran) request to Firebase directly.
      */
-    private fun prosesBooking(dokter: Dokter) {
-        val request = PendaftaranRequest(
-            pasien_id = userNik,
-            nama_pasien = userNama,
-            poli = poliNama,
-            tanggal_kunjungan = tanggal,
-            id_jadwal = dokter.id_jadwal
-        )
+    private fun prosesBooking(dokter: Dokter, keluhanInput: String) {
+        // Tampilkan loading jika ada, atau block UI sebentar
+        Toast.makeText(this, "Memproses pendaftaran...", Toast.LENGTH_SHORT).show()
 
-        lifecycleScope.launch {
-            try {
-                val response = RetrofitClient.instance.daftarAntrean(request)
-                if (response.isSuccessful && response.body() != null) {
-                    val nomorAntrean = response.body()?.data?.nomor_antrean ?: 0
-                    showSuccessDialog(nomorAntrean, dokter.nama, poliNama, tanggal)
-                } else {
-                    val rawError = response.errorBody()?.string()
-                    var cleanMsg = "Gagal mendaftar antrean"
-                    if (!rawError.isNullOrBlank()) {
-                        try {
-                            val jsonObject = org.json.JSONObject(rawError)
-                            if (jsonObject.has("message")) {
-                                cleanMsg = jsonObject.getString("message")
+        val database = com.google.firebase.database.FirebaseDatabase.getInstance()
+        val antreanRef = database.getReference("antrean")
+        
+        val newAntreanId = antreanRef.push().key ?: java.util.UUID.randomUUID().toString()
+
+        // Ambil data antrean untuk menghitung nomor antrean
+        antreanRef.orderByChild("tanggal_kunjungan").equalTo(tanggal)
+            .addListenerForSingleValueEvent(object : com.google.firebase.database.ValueEventListener {
+                override fun onDataChange(snapshot: com.google.firebase.database.DataSnapshot) {
+                    var maxNomor = 0
+                    for (data in snapshot.children) {
+                        val dbPasienId = data.child("pasien_id").getValue(String::class.java)
+                        val dbTanggal = data.child("tanggal_kunjungan").getValue(String::class.java)
+                        val dbDokterId = data.child("dokter_id").getValue(String::class.java)
+                        val dbStatus = data.child("status").getValue(String::class.java)
+
+                        // PROTEKSI DOUBLE BOOKING
+                        if (dbPasienId == userNik && dbTanggal == tanggal && dbDokterId == dokter.nik && dbStatus != "dibatalkan") {
+                            Toast.makeText(this@PendaftaranKlinikActivity, "Maaf, Anda sudah terdaftar di dokter ini pada tanggal yang sama!", Toast.LENGTH_LONG).show()
+                            return
+                        }
+                        
+                        // Hitung max nomor antrean
+                        if (dbDokterId == dokter.nik && dbStatus != "dibatalkan") {
+                            val no = data.child("nomor_antrean").getValue(Int::class.java) ?: 0
+                            if (no > maxNomor) {
+                                maxNomor = no
                             }
-                        } catch (e: Exception) {
-                            Log.e("PENDAFTARAN_KLINIK", "Error parsing error body: ${e.message}")
                         }
                     }
-                    Log.e("PENDAFTARAN_KLINIK", "Booking failed: $cleanMsg")
-                    Toast.makeText(this@PendaftaranKlinikActivity, cleanMsg, Toast.LENGTH_LONG).show()
+
+                    val newNomor = maxNomor + 1
+
+                    val pendaftaran = com.example.klinikku.data.model.Pendaftaran(
+                        id_antrean = newAntreanId,
+                        pasien_id = userNik,
+                        nama_pasien = userNama,
+                        dokter_id = dokter.nik,
+                        nama_dokter = dokter.nama,
+                        poli = poliNama,
+                        tanggal_kunjungan = tanggal,
+                        jam_praktek = "${dokter.jam_mulai} - ${dokter.jam_selesai}",
+                        nomor_antrean = newNomor,
+                        status = "Menunggu",
+                        keluhan = keluhanInput
+                    )
+
+                    antreanRef.child(newAntreanId).setValue(pendaftaran)
+                        .addOnSuccessListener {
+                            showSuccessDialog(newNomor, dokter.nama, poliNama, tanggal)
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(this@PendaftaranKlinikActivity, "Gagal mendaftar: ${e.message}", Toast.LENGTH_SHORT).show()
+                        }
                 }
-            } catch (e: Exception) {
-                Log.e("PENDAFTARAN_KLINIK", "Booking exception: ${e.message}")
-                Toast.makeText(this@PendaftaranKlinikActivity, "Koneksi Error: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-        }
+
+                override fun onCancelled(error: com.google.firebase.database.DatabaseError) {
+                    Toast.makeText(this@PendaftaranKlinikActivity, "Gagal mengecek nomor antrean", Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 
     private fun showSuccessDialog(nomor: Int, namaDokter: String, poli: String, tgl: String) {

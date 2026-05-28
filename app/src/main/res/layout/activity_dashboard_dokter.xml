@@ -1,234 +1,622 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7FA">
+    android:background="@color/bg_light_gray"
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
+    <!-- ======================== SCREEN 1: BERANDA CONTENT ======================== -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/layoutBerandaContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="56dp"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:overScrollMode="always"
+        android:visibility="visible">
 
-        <!-- Header Dashboard Dokter -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- ========== SECTION 1: HEADER / WELCOME ========== -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="20dp">
+
+                <!-- Left: Greeting -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvGreeting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dashboard_greeting"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:fontFamily="sans-serif-medium"/>
+
+                    <TextView
+                        android:id="@+id/tvSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dashboard_subtitle"
+                        android:textSize="13sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="sans-serif"/>
+                </LinearLayout>
+
+                <!-- Right: Notification Bell -->
+                <FrameLayout
+                    android:layout_width="44dp"
+                    android:layout_height="44dp">
+
+                    <ImageView
+                        android:id="@+id/btnNotification"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_notification_bell"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:tint="@color/text_secondary"
+                        android:contentDescription="@string/notifikasi"/>
+
+                    <!-- Notification Badge Dot -->
+                    <View
+                        android:id="@+id/viewNotifBadge"
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="top|end"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_badge_green"/>
+                </FrameLayout>
+            </LinearLayout>
+
+            <!-- ========== SECTION 2: PROFILE CARD ========== -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/emerald_green"
+                app:strokeWidth="0dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <!-- Decorative Background Overlay -->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/bg_profile_card_decoration"
+                        android:scaleType="fitXY"
+                        android:importantForAccessibility="no"/>
+
+                    <!-- Profile Content -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="20dp">
+
+                        <!-- Avatar with white border -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            app:cardCornerRadius="32dp"
+                            app:strokeColor="@color/white"
+                            app:strokeWidth="3dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="#33FFFFFF">
+
+                            <ImageView
+                                android:id="@+id/ivAvatarDokter"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_person"
+                                android:padding="14dp"
+                                app:tint="@color/white"
+                                android:contentDescription="@string/avatar_dokter"/>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Profile Info -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_nama_lengkap"
+                                android:textSize="11sp"
+                                android:textColor="#B3FFFFFF"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.05"
+                                android:fontFamily="sans-serif-medium"/>
+
+                            <TextView
+                                android:id="@+id/tvNamaDokter"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/memuat"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/white"
+                                android:layout_marginBottom="8dp"
+                                android:fontFamily="sans-serif-medium"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/label_nik"
+                                android:textSize="11sp"
+                                android:textColor="#B3FFFFFF"
+                                android:textStyle="bold"
+                                android:letterSpacing="0.05"
+                                android:fontFamily="sans-serif-medium"/>
+
+                            <TextView
+                                android:id="@+id/tvNikDokter"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="-"
+                                android:textSize="14sp"
+                                android:textColor="@color/white"
+                                android:fontFamily="monospace"/>
+                        </LinearLayout>
+
+                        <!-- Logout Button -->
+                        <ImageView
+                            android:id="@+id/ivLogoutKustom"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="12dp"
+                            android:src="@android:drawable/ic_lock_power_off"
+                            android:contentDescription="Tombol Logout"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:tint="@color/white" />
+                    </LinearLayout>
+                </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ========== SECTION 3: METRICS / RINGKASAN HARI INI ========== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/section_ringkasan"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="sans-serif-medium"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:layout_marginBottom="20dp">
+
+                <!-- Metric: Pasien -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="0dp"
+                    app:cardBackgroundColor="@color/card_surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp">
+
+                        <FrameLayout
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginBottom="8dp">
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_rounded_icon"
+                                android:backgroundTint="@color/metric_blue_bg"/>
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_people"
+                                app:tint="@color/metric_blue"
+                                android:importantForAccessibility="no"/>
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvMetricPasien"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"
+                            android:fontFamily="sans-serif-medium"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_pasien"
+                            android:textSize="11sp"
+                            android:textColor="@color/text_secondary"
+                            android:fontFamily="sans-serif"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Metric: Jadwal -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="4dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="0dp"
+                    app:cardBackgroundColor="@color/card_surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp">
+
+                        <FrameLayout
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginBottom="8dp">
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_rounded_icon"
+                                android:backgroundTint="@color/metric_green_bg"/>
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_calendar"
+                                app:tint="@color/metric_green"
+                                android:importantForAccessibility="no"/>
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvMetricJadwal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"
+                            android:fontFamily="sans-serif-medium"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_jadwal"
+                            android:textSize="11sp"
+                            android:textColor="@color/text_secondary"
+                            android:fontFamily="sans-serif"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Metric: Rating -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="0dp"
+                    app:cardBackgroundColor="@color/card_surface">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp">
+
+                        <FrameLayout
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginBottom="8dp">
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_rounded_icon"
+                                android:backgroundTint="@color/metric_orange_bg"/>
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_star"
+                                app:tint="@color/metric_orange"
+                                android:importantForAccessibility="no"/>
+                        </FrameLayout>
+
+                        <TextView
+                            android:id="@+id/tvMetricRating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="-"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"
+                            android:fontFamily="sans-serif-medium"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/label_rating"
+                            android:textSize="11sp"
+                            android:textColor="@color/text_secondary"
+                            android:fontFamily="sans-serif"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- ========== SECTION 4: MENU REMINDER ========== -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnJadwalPraktek"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lihat Jadwal Praktek"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                app:cornerRadius="12dp"
+                android:layout_marginBottom="20dp"
+                app:backgroundTint="@color/emerald_green"
+                app:icon="@drawable/ic_calendar"/>
+
+            <!-- ========== SECTION 5: RIWAYAT PASIEN ========== -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Riwayat Medis Pasien"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="sans-serif-medium"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@color/card_surface">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvRiwayatPasien"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- ======================== SCREEN 2: ANTREAN REALTIME CONTENT ======================== -->
+    <LinearLayout
+        android:id="@+id/layoutAntreanContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginBottom="56dp"
+        android:visibility="gone">
+
+        <!-- Header Panel Antrean -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dashboard Dokter"
-            android:textSize="24sp"
+            android:text="Antrean Realtime Hari Ini"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#2D3436"
-            android:layout_marginBottom="20dp"/>
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="sans-serif-medium"/>
 
-        <!-- Card Profil Dokter -->
-        <androidx.cardview.widget.CardView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kelola dan layani pasien aktif sesuai jadwal praktek"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="sans-serif"/>
+
+        <!-- TIMER / ACTIVE EXAM PANEL -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPemeriksaanAktif"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="5dp"
-            app:cardBackgroundColor="#0984E3"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#1AE0E0E0"
+            app:cardBackgroundColor="@color/card_surface"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="16dp">
 
-                <!-- Icon Avatar + Label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PEMERIKSAAN SEDANG BERLANGSUNG"
+                    android:textSize="11sp"
+                    android:textColor="@color/metric_orange"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.05"
+                    android:layout_marginBottom="6dp"/>
+
+                <TextView
+                    android:id="@+id/tvNamaPasienAktif"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Pasien"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/tvWaktuPemeriksaan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sisa waktu: 30:00"
+                    android:textSize="14sp"
+                    android:textColor="@color/deep_blue"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Control Buttons -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="16dp">
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:src="@android:drawable/ic_menu_myplaces"
-                        app:tint="#FFFFFF"
-                        android:contentDescription="Ikon Dokter"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSelesaiPeriksa"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:text="PROFIL DOKTER"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="#B3FFFFFF"
-                        android:letterSpacing="0.1"/>
+                        android:layout_weight="1"
+                        android:text="Selesai"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/emerald_green"
+                        app:cornerRadius="8dp"
+                        android:layout_marginEnd="8dp"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnNextAntrean"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Next"
+                        android:textColor="@color/white"
+                        app:backgroundTint="@color/deep_blue"
+                        app:cornerRadius="8dp"
+                        android:layout_marginStart="8dp"/>
                 </LinearLayout>
 
-                <!-- Nama Dokter -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NAMA LENGKAP"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:textColor="#B3FFFFFF"/>
-
-                <TextView
-                    android:id="@+id/tvNamaDokter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Memuat..."
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
-                    android:layout_marginBottom="12dp"/>
-
-                <!-- Divider -->
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#33FFFFFF"
-                    android:layout_marginBottom="12dp"/>
-
-                <!-- NIK Dokter -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="NOMOR INDUK KEPENDUDUKAN (NIK)"
-                    android:textSize="11sp"
-                    android:textStyle="bold"
-                    android:textColor="#B3FFFFFF"/>
-
-                <TextView
-                    android:id="@+id/tvNikDokter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="-"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
-                    android:fontFamily="monospace"/>
-
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <!-- Section: Menu Fitur Dokter -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Menu Dokter"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#2D3436"
-            android:layout_marginBottom="15dp"/>
-
-        <!-- Placeholder: Lihat Jadwal Praktek -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/btnMenuJadwalPraktek"
+        <!-- Container Antrean Realtime List -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAntreanRealtime"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="18dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:clipToPadding="false"/>
+
+            <!-- Empty State Antrean -->
+            <LinearLayout
+                android:id="@+id/layoutAntreanKosong"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="gone">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@android:drawable/ic_menu_today"
-                    app:tint="#0984E3"
-                    android:contentDescription="Jadwal"/>
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_people"
+                    app:tint="@color/text_secondary"
+                    android:alpha="0.5"
+                    android:importantForAccessibility="no"
+                    android:layout_marginBottom="16dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:text="Lihat Jadwal Praktek"
+                    android:text="Belum ada antrean masuk hari ini"
+                    android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="#2D3436"
-                    android:textSize="14sp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Placeholder: Lihat Daftar Pasien Antrean -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/btnMenuAntreanPasien"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="18dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@android:drawable/ic_menu_sort_by_size"
-                    app:tint="#00B894"
-                    android:contentDescription="Antrean"/>
+                    android:textColor="@color/text_primary"
+                    android:layout_marginBottom="4dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:text="Daftar Pasien Antrean Hari Ini"
-                    android:textStyle="bold"
-                    android:textColor="#2D3436"
-                    android:textSize="14sp"/>
+                    android:text="Semua antrean pasien aktif akan terdaftar di sini"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary"
+                    android:textAlignment="center"/>
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Menu Logout -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/btnMenuLogout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="18dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@android:drawable/ic_menu_close_clear_cancel"
-                    app:tint="#D63031"
-                    android:contentDescription="Logout"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:text="Keluar / Logout"
-                    android:textStyle="bold"
-                    android:textColor="#D63031"
-                    android:textSize="14sp"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
+        </FrameLayout>
     </LinearLayout>
-</ScrollView>
+
+    <!-- ========== SECTION 6: BOTTOM NAVIGATION ========== -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        app:menu="@menu/bottom_nav_menu_dokter"
+        app:itemIconTint="@color/bottom_nav_colors"
+        app:itemTextColor="@color/bottom_nav_colors"
+        app:labelVisibilityMode="labeled"
+        app:elevation="8dp"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

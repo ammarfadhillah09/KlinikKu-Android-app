@@ -1,13 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.services)
 }
 
 android {
     namespace = "com.example.klinikku"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.klinikku"
@@ -36,7 +35,6 @@ android {
         jvmTarget = "11"
     }
 
-    // Aktifkan View Binding agar class binding otomatis di-generate dari layout XML
     buildFeatures {
         viewBinding = true
     }
@@ -51,15 +49,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    // UI Dasar
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    implementation(libs.androidx.constraintlayout)
-    // Retrofit untuk REST API [cite: 26]
+
+    // Retrofit untuk REST API
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
     // Coroutines untuk task background
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+
+    // Firebase (BOM manages versions)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.database.ktx)
 }

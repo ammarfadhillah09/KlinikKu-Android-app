@@ -27,6 +27,7 @@ class RiwayatAntreanAdapter(
         val tvNoAntrean: TextView = view.findViewById(R.id.tvRiwayatNoAntrean)
         val btnCancel: MaterialButton = view.findViewById(R.id.btnCancelAntrean)
         val layoutMedicalResults: View = view.findViewById(R.id.layoutMedicalResults)
+        val tvKeluhan: TextView = view.findViewById(R.id.tvKeluhan)
         val tvDiagnosa: TextView = view.findViewById(R.id.tvDiagnosa)
         val tvObat: TextView = view.findViewById(R.id.tvObat)
         val tvCatatanDokter: TextView = view.findViewById(R.id.tvCatatanDokter)
@@ -48,7 +49,7 @@ class RiwayatAntreanAdapter(
 
         // Status badge styling
         holder.tvStatus.text = item.status
-        when (item.status.lowercase(Locale.ROOT)) {
+        when ((item.status ?: "").lowercase(Locale.ROOT)) {
             "pending", "menunggu" -> {
                 holder.tvStatus.setBackgroundColor(Color.parseColor("#FFF3E0")) // Orange light
                 holder.tvStatus.setTextColor(Color.parseColor("#F57C00"))
@@ -68,7 +69,7 @@ class RiwayatAntreanAdapter(
         }
 
         // H-1 Visual Guard
-        val statusClean = item.status.trim().lowercase(Locale.ROOT)
+        val statusClean = (item.status ?: "").trim().lowercase(Locale.ROOT)
 
         if (statusClean == "menunggu" || statusClean == "pending") {
             // Default to visible first
@@ -104,18 +105,42 @@ class RiwayatAntreanAdapter(
             holder.btnCancel.visibility = View.GONE
         }
 
+        // Bind Keluhan to appear outside/above medical results unconditionally
+        holder.tvKeluhan.text = "Keluhan: " + (item.keluhan ?: "-")
+
         // Bind medical results if status is "selesai"
         if (item.status.equals("selesai", ignoreCase = true)) {
             holder.layoutMedicalResults.visibility = View.VISIBLE
-            holder.tvDiagnosa.text = item.diagnosa ?: "-"
-            holder.tvObat.text = item.obat ?: "-"
+            holder.tvDiagnosa.text = "Diagnosa Dokter: " + (item.diagnosa ?: "Belum diperiksa")
+            holder.tvObat.text = "Obat: " + (item.obat ?: "-")
             holder.tvCatatanDokter.text = item.catatan_dokter ?: "-"
         } else {
             holder.layoutMedicalResults.visibility = View.GONE
         }
 
         holder.btnCancel.setOnClickListener {
-            item.id_antrean?.let { id -> onCancelClick(id) }
+            try {
+                val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+                val targetDate = sdf.parse(item.tanggal_kunjungan) ?: java.util.Date()
+                val today = sdf.parse(sdf.format(java.util.Date())) ?: java.util.Date()
+
+                val diffInMillies = targetDate.time - today.time
+                val diffInDays = java.util.concurrent.TimeUnit.DAYS.convert(diffInMillies, java.util.concurrent.TimeUnit.MILLISECONDS)
+
+                if (diffInDays <= 0) {
+                    // JIKA DIKLIK PADA HARI-H ATAU SUDAH LEWAT, BLOKIR TOTAL!
+                    android.widget.Toast.makeText(
+                        holder.itemView.context, 
+                        "Pembatalan gagal! Antrean hanya dapat dibatalkan maksimal H-1 sebelum tanggal kunjungan.", 
+                        android.widget.Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    // JIKA MINIMAL H-1, BARU EKSEKUSI PEMBATALAN KE FIREBASE!
+                    item.id_antrean?.let { id -> onCancelClick(id) }
+                }
+            } catch (e: Exception) {
+                item.id_antrean?.let { id -> onCancelClick(id) }
+            }
         }
     }
 

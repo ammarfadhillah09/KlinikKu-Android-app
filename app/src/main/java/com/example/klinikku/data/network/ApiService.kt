@@ -45,6 +45,9 @@ interface ApiService {
     @POST("api/pasien/pendaftaran")
     suspend fun daftarAntrean(@Body request: PendaftaranRequest): Response<PendaftaranResponse>
 
+    @GET("api/pasien/pendaftaran")
+    suspend fun getAllPendaftaran(): Response<List<Pendaftaran>>
+
     // 10. Fitur Tambah Akun Dokter (Admin Only)
     @POST("api/admin/dokter")
     suspend fun addDokter(@Body dokter: Dokter): Response<PasienResponse>

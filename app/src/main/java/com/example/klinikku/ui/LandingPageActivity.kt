@@ -20,36 +20,54 @@ class LandingPageActivity : AppCompatActivity() {
         lifecycleScope.launch {
             delay(2500)
             val sessionManager = SessionManager(this@LandingPageActivity)
+
             if (sessionManager.isLoggedIn()) {
                 val role = sessionManager.getRole()
                 val nik = sessionManager.getNik()
-                if (role == "admin") {
-                    val intent = Intent(this@LandingPageActivity, MainActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                // Navigasi Auto-Login yang Benar Berdasarkan 3 Role
+                when (role) {
+                    "admin" -> {
+                        val intent = Intent(this@LandingPageActivity, MainActivity::class.java).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        }
+                        startActivity(intent)
                     }
-                    startActivity(intent)
-                } else {
-                    if (!nik.isNullOrEmpty()) {
-                        val intent = Intent(this@LandingPageActivity, DetailPasienActivity::class.java).apply {
-                            putExtra("NIK_PASIEN", nik)
+                    "dokter" -> {
+                        val intent = Intent(this@LandingPageActivity, DashboardDokterActivity::class.java).apply {
                             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         }
                         startActivity(intent)
-                    } else {
-                        // Safe fallback if NIK is missing
-                        val intent = Intent(this@LandingPageActivity, LoginActivity::class.java).apply {
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    "pasien" -> {
+                        if (!nik.isNullOrEmpty()) {
+                            val intent = Intent(this@LandingPageActivity, DashboardPasienActivity::class.java).apply {
+                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            }
+                            startActivity(intent)
+                        } else {
+                            navigasiKeLogin()
                         }
-                        startActivity(intent)
+                    }
+                    else -> {
+                        // Jika role tidak dikenali, lempar ke halaman login
+                        navigasiKeLogin()
                     }
                 }
             } else {
-                val intent = Intent(this@LandingPageActivity, LoginActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                }
-                startActivity(intent)
+                navigasiKeLogin()
             }
             finish()
         }
+    }
+
+    /**
+     * Helper fungsi untuk merapikan baris intent ke LoginActivity
+     */
+    private fun navigasiKeLogin() {
+        val intent = Intent(this@LandingPageActivity, LoginActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        startActivity(intent)
     }
 }

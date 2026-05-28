@@ -130,6 +130,16 @@
                 tools:text="5" />
         </LinearLayout>
 
+        <!-- Keluhan -->
+        <TextView
+            android:id="@+id/tvKeluhan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#212121"
+            android:textSize="14sp"
+            android:layout_marginBottom="16dp"
+            tools:text="Keluhan: Sakit Kepala" />
+
         <!-- Medical Results Container -->
         <LinearLayout
             android:id="@+id/layoutMedicalResults"
@@ -157,69 +167,34 @@
                 android:layout_marginBottom="8dp" />
 
             <!-- Diagnosa -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvDiagnosa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="4dp">
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Diagnosa:"
-                    android:textColor="#757575"
-                    android:textSize="13sp" />
-                <TextView
-                    android:id="@+id/tvDiagnosa"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="#212121"
-                    android:textSize="13sp"
-                    tools:text="Flu ringan" />
-            </LinearLayout>
+                android:textColor="#212121"
+                android:textSize="13sp"
+                android:layout_marginBottom="4dp"
+                tools:text="Diagnosa Dokter: Flu ringan" />
 
             <!-- Obat -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvObat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="4dp">
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Obat:"
-                    android:textColor="#757575"
-                    android:textSize="13sp" />
-                <TextView
-                    android:id="@+id/tvObat"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="#212121"
-                    android:textSize="13sp"
-                    tools:text="Paracetamol 3x1" />
-            </LinearLayout>
+                android:textColor="#212121"
+                android:textSize="13sp"
+                android:layout_marginBottom="4dp"
+                tools:text="Obat: Paracetamol 3x1" />
 
             <!-- Catatan Dokter -->
-            <LinearLayout
+            <TextView
+                android:id="@+id/tvCatatanDokter"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="Catatan:"
-                    android:textColor="#757575"
-                    android:textSize="13sp" />
-                <TextView
-                    android:id="@+id/tvCatatanDokter"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="#212121"
-                    android:textSize="13sp"
-                    tools:text="Istirahat yang cukup" />
-            </LinearLayout>
+                android:textColor="#212121"
+                android:textSize="13sp"
+                android:visibility="gone"
+                tools:text="Istirahat yang cukup" />
 
         </LinearLayout>
 
